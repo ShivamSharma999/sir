@@ -204,16 +204,6 @@
       animation: fadeIn 2s ease-in-out;
     }
 
-    .math-challenge {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: 2px solid var(--primary-color);
-      border-radius: 10px;
-      background: rgba(255,255,255,0.05);
-      font-size: 1.1em;
-      animation: pulse 3s infinite;
-    }
-
     /* Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-50px); }
@@ -316,7 +306,6 @@
     </div>
 
     <div class="math-facts" id="mathFact">Loading math fact...</div>
-    <div class="math-challenge" id="mathChallenge">Solve: ?</div>
 
     <footer>~ Made with pride & honour by Shivam Sharma</footer>
   </div>
@@ -359,17 +348,6 @@
 
     showRandomFact();
     setInterval(showRandomFact, 6000);
-
-    function generateChallenge() {
-      const a = Math.floor(Math.random() * 10) + 1;
-      const b = Math.floor(Math.random() * 10) + 1;
-      const ops = ["+", "-", "×", "÷"];
-      const op = ops[Math.floor(Math.random() * ops.length)];
-      document.getElementById('mathChallenge').innerText = `Solve: ${a} ${op} ${b}`;
-    }
-
-    generateChallenge();
-    setInterval(generateChallenge, 8000);
   </script>
 </body>
 </html>
