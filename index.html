@@ -464,13 +464,12 @@
       setClock();
       setInterval(setClock, 1000);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/contrib/auto-render/auto-render.js"></script>
-    <script>
-      const auto = renderMathInElement;
-    </script>
     <script type="module" defer>
-      import katex from 'https://cdn.jsdelivr.net/npm/katex@0.16.22/+esm';
+      import katex from "./katex/dist/katex.mjs";
+      import auto from "./katex/dist/contrib/auto-render.mjs";
+      auto(document.body);
       window.katex = katex;
+      window.auto = auto;
       document.querySelectorAll("span").forEach((span) => auto(span));
       getFact();
     </script>
