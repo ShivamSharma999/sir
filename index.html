@@ -17,6 +17,7 @@
     * {
       box-sizing: border-box;
       user-select: none;
+      overflow: hidden;
     }
 
     body {
@@ -183,8 +184,8 @@
       justify-content: center;
       align-items: center;
       list-style: none;
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
       background: rgba(255, 255, 255, 0.1);
       animation: animate-bg 25s linear infinite;
       bottom: -150px;
@@ -193,21 +194,30 @@
     }
 
     .bg-animation li:nth-child(1) {
-      left: 80%;
+      left: 90%;
+      animaton-delay: 1s;
     }
-    .bg-animation li:nth-child(2) {left: 70%}
+    .bg-animation li:nth-child(2) {left: 80%}
     .bg-animation li:nth-child(3) {
-      left: 60%;
+      left: 70%;
+      animation-delay: 2s;
+      width: 50px;
+      height: 50px;
     }
-    .bg-animation li:nth-child(4) {left: 30%}
+    .bg-animation li:nth-child(4) {left: 20%; animation-delay: 6.5s}
     .bg-animation li:nth-child(5) {
       left: 50%;
+      animation-delay: .5s;
     }
-    .bg-animation li:nth-child(6) {left: 10%}
+    .bg-animation li:nth-child(6) {left: 10%; animation-delay: 4.5s;}
       .bg-animation li:nth-child(7) {
       left: 40%;
+        animation-delay: 5s;
     }
-    .bg-animation li:nth-child(8) {left: 0%}
+    .bg-animation li:nth-child(8) {
+      left: 0%;
+      animation-delay: 4s;
+      }
     
 
     footer {
