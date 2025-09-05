@@ -186,16 +186,29 @@
       width: 20px;
       height: 20px;
       background: rgba(255, 255, 255, 0.1);
-      animation: zoomIn 25s linear infinite;
+      animation: animate-bg 25s linear infinite;
       bottom: -150px;
       font-size: 2em;
       color: var(--primary-color);
     }
 
     .bg-animation li:nth-child(1) {
+      left: 80%;
+    }
+    .bg-animation li:nth-child(2) {left: 70%}
+    .bg-animation li:nth-child(3) {
+      left: 60%;
+    }
+    .bg-animation li:nth-child(4) {left: 30%}
+    .bg-animation li:nth-child(5) {
       left: 50%;
     }
-    .bg-animation li:nth-child(2) {left: 90%}
+    .bg-animation li:nth-child(6) {left: 10%}
+      .bg-animation li:nth-child(7) {
+      left: 40%;
+    }
+    .bg-animation li:nth-child(8) {left: 0%}
+    
 
     footer {
       margin-top: 20px;
@@ -354,13 +367,6 @@
 
     showRandomFact();
     setInterval(showRandomFact, 6000);
-
-    const allIcons = document.querySelectorAll('.bg-animation li');
-    allIcons.forEach(
-      icon => {
-        icon.style.left = `${Math.random * (Math.random * 10)}%`
-      }
-    );
   </script>
 </body>
 </html>
