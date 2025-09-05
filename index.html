@@ -192,6 +192,11 @@
       color: var(--primary-color);
     }
 
+    .bg-animation li:nth-child(1) {
+      left: 50%;
+    }
+    .bg-animation li:nth-child(2) {left: 90%}
+
     footer {
       margin-top: 20px;
       font-size: 1em;
@@ -349,6 +354,13 @@
 
     showRandomFact();
     setInterval(showRandomFact, 6000);
+
+    const allIcons = document.querySelectorAll('.bg-animation li');
+    allIcons.forEach(
+      icon => {
+        icon.left = `${Math.random * (Math.random * 10)}%`
+      }
+    );
   </script>
 </body>
 </html>
