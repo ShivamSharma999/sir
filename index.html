@@ -1,382 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Teacher's Day! - By Shivam Sharma</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Shadows+Into+Light+Two&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Teacher's Day! - By Shivam Sharma</title>
+    <link rel="stylesheet" href="katex/dist/katex.css" />
+    <style>
+      /* CSS Code */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Shadows+Into+Light+Two&display=swap");
 
-    :root {
-      --primary-color: #4ea5cd;
-      --background-color: #2c2c2c;
-      --text-color: #ecf0f1;
-      --clock-border: #242424;
-    }
-
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      overflow: hidden;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-      text-align: center;
-    }
-
-    .main-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .header {
-      animation: fadeInDown 1.5s ease-out forwards;
-      opacity: 0;
-    }
-
-    h1 {
-      font-size: 3em;
-      color: var(--primary-color);
-      font-family: 'Shadows Into Light Two', cursive;
-      margin: 0;
-      letter-spacing: 2px;
-      animation: text-flicker 3s linear infinite alternate;
-    }
-
-    h2 {
-      font-size: 1.5em;
-      font-weight: 300;
-      margin: 10px 0 20px;
-    }
-
-    .clock-container {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 5px solid var(--clock-border);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0,0,0,0.3);
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: zoomIn 1s ease-out 0.5s forwards, floatClock 5s ease-in-out infinite alternate;
-      opacity: 0;
-      padding: 10px;
-      transform: scale(0.5);
-    }
-
-    .clock-face {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    .clock-face::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 15px;
-      height: 15px;
-      background: var(--primary-color);
-      border-radius: 50%;
-      z-index: 11;
-      border: 2px solid var(--background-color);
-    }
-
-    .hand {
-      width: 50%;
-      height: 4px;
-      background: var(--text-color);
-      position: absolute;
-      top: 50%;
-      transform-origin: 100%;
-      transform: rotate(90deg);
-      transition: transform 0.05s cubic-bezier(0.4, 2.3, 0.6, 1);
-      border-radius: 2px;
-    }
-
-    .hour-hand {
-      width: 30%;
-      left: 20%;
-      background-color: var(--primary-color);
-      height: 6px;
-      z-index: 8;
-    }
-
-    .minute-hand {
-      width: 40%;
-      left: 10%;
-      height: 4px;
-      z-index: 9;
-    }
-
-    .second-hand {
-      width: 45%;
-      left: 5%;
-      background: red;
-      height: 2px;
-      z-index: 10;
-    }
-
-    .number {
-      --rotation: 0;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      text-align: center;
-      transform: rotate(var(--rotation));
-      font-size: 1.1em;
-      font-family: cursive;
-      font-weight: bold;
-    }
-
-    .number span {
-      display: inline-block;
-      transform: rotate(calc(-1 * var(--rotation)));
-      padding: 5px;
-    }
-
-    .number-1 { --rotation: 30deg; }
-    .number-2 { --rotation: 60deg; }
-    .number-3 { --rotation: 90deg; }
-    .number-4 { --rotation: 120deg; }
-    .number-5 { --rotation: 150deg; }
-    .number-6 { --rotation: 180deg; }
-    .number-7 { --rotation: 210deg; }
-    .number-8 { --rotation: 240deg; }
-    .number-9 { --rotation: 270deg; }
-    .number-10 { --rotation: 300deg; }
-    .number-11 { --rotation: 330deg; }
-    .number-12 { --rotation: 0deg; }
-
-    .bg-animation {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .bg-animation li {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style: none;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      animation: animate-bg 25s linear infinite;
-      bottom: -150px;
-      font-size: 2em;
-      color: var(--primary-color);
-    }
-
-    .bg-animation li:nth-child(1) {
-      left: 90%;
-      animaton-delay: 1s;
-    }
-    .bg-animation li:nth-child(2) {left: 80%}
-    .bg-animation li:nth-child(3) {
-      left: 70%;
-      animation-delay: 2s;
-      width: 50px;
-      height: 50px;
-    }
-    .bg-animation li:nth-child(4) {left: 20%; animation-delay: 6.5s}
-    .bg-animation li:nth-child(5) {
-      left: 50%;
-      animation-delay: .5s;
-    }
-    .bg-animation li:nth-child(6) {left: 10%; animation-delay: 4.5s;}
-      .bg-animation li:nth-child(7) {
-      left: 40%;
-        animation-delay: 5s;
-    }
-    .bg-animation li:nth-child(8) {
-      left: 0%;
-      animation-delay: 4s;
+      :root {
+        --primary-color: #4ea5cd;
+        --background-color: #2c2c2c;
+        --text-color: #ecf0f1;
+        --clock-border: #242424;
       }
-    
 
-    footer {
-      margin-top: 20px;
-      font-size: 1em;
-      animation: glowText 2s infinite alternate;
-    }
+      * {
+        user-select: none;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        max-width: 100vw;
+        max-height: 100vh;
+        transition: all 0.5s linear;
+      }
 
-    .math-facts {
-      margin-top: 20px;
-      font-size: 1.2em;
-      font-weight: bold;
-      animation: fadeIn 2s ease-in-out;
-    }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 99vh;
+        height: 100vh;
+        text-align: center;
+      }
 
-    /* Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
 
-    @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
-    }
+      .header {
+        animation: fadeInDown 1.5s ease-out forwards;
+        opacity: 0;
+      }
 
-    @keyframes text-flicker {
-      0% { opacity: 0.8; text-shadow: 0 0 10px var(--primary-color); }
-      50% { opacity: 1; text-shadow: 0 0 20px var(--primary-color); }
-      100% { opacity: 0.8; text-shadow: 0 0 10px var(--primary-color); }
-    }
+      h1 {
+        font-size: 3em;
+        color: var(--primary-color);
+        font-family: "Shadows Into Light Two", cursive;
+        margin: 0;
+        letter-spacing: 2px;
+        animation: text-flicker 3s linear infinite alternate;
+      }
 
-    @keyframes animate-bg {
-      0%{ transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
-      100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
-    }
+      h2 {
+        font-size: 1.5em;
+        font-weight: 300;
+        margin: 10px 0 30px;
+      }
 
-    @keyframes floatClock {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-15px) scale(1.05); }
-    }
+      .clock-container {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.253);
+        border: 5px solid var(--clock-border);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5),
+          inset 0 0 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: zoomIn 1s ease-out 0.5s forwards;
+        opacity: 0;
+        padding: 20px;
+        transform: scale(0.5);
+      }
 
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px var(--primary-color); }
-      to { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
-    }
+      .clock-face {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px var(--primary-color); }
-      50% { box-shadow: 0 0 20px var(--primary-color); }
-      100% { box-shadow: 0 0 10px var(--primary-color); }
-    }
+      .clock-face::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        z-index: 11;
+        border: 2px solid var(--background-color);
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+      .hand {
+        width: 50%;
+        height: 4px;
+        background: var(--text-color);
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: transform 0.05s cubic-bezier(0.4, 2.3, 0.6, 1);
+        border-radius: 2px;
+      }
 
-    /* Responsiveness */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2em; }
-      h2 { font-size: 1.2em; }
-      .clock-container { width: 220px; height: 220px; }
-      .number { font-size: 0.9em; }
-    }
+      .hour-hand {
+        width: 30%;
+        left: 20%;
+        background-color: var(--primary-color);
+        height: 6px;
+        z-index: 8;
+      }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.8em; }
-      h2 { font-size: 1em; }
-      .clock-container { width: 180px; height: 180px; }
-      footer { font-size: 0.9em; }
-    }
-  </style>
-</head>
-<body>
-  <ul class="bg-animation">
-    <li>&int;</li>
-    <li>&Sigma;</li>
-    <li>&radic;</li>
-    <li>&pi;</li>
-    <li>&infin;</li>
-    <li>&part;</li>
-    <li>x&sup2;</li>
-    <li>&alpha;</li>
-    <li>&beta;</li>
-    <li>&gamma;</li>
-  </ul>
+      .minute-hand {
+        width: 40%;
+        left: 10%;
+        height: 4px;
+        z-index: 9;
+      }
 
-  <div class="main-container">
-    <header class="header">
-      <h1>Happy Teacher's Day!</h1>
-      <h2>Shubronil Sir!!!</h2>
-      <h2>Thank you for making Math magical!</h2>
-    </header>
+      .second-hand {
+        width: 45%;
+        left: 5%;
+        background: red;
+        height: 2px;
+        z-index: 10;
+      }
 
-    <div class="clock-container">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand minute-hand"></div>
-        <div class="hand second-hand"></div>
+      .number {
+        --rotation: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        text-align: center;
+        transform: rotate(var(--rotation));
+        font-size: 1.1em;
+        font-family: cursive;
+        font-weight: bold;
+      }
 
-        <div class="number number-1"><span>sin²θ+cos²θ</span></div>
-        <div class="number number-2"><span>&radic;4</span></div>
-        <div class="number number-3"><span>&#8731;27</span></div>
-        <div class="number number-4"><span>2&sup2;</span></div>
-        <div class="number number-5"><span>&radic;(16+9)</span></div>
-        <div class="number number-6"><span>3!</span></div>
-        <div class="number number-7"><span>49/7</span></div>
-        <div class="number number-8"><span>2&sup3;</span></div>
-        <div class="number number-9"><span>&radic;81</span></div>
-        <div class="number number-10"><span>20 &divide; 2</span></div>
-        <div class="number number-11"><span>&radic;121</span></div>
-        <div class="number number-12"><span>12</span></div>
+      .number span:not(span span) {
+        display: inline-block;
+        transform: rotate(calc(-1 * var(--rotation)));
+        padding: 5px;
+      }
+
+      .number-1 {
+        --rotation: 30deg;
+      }
+      .number-2 {
+        --rotation: 60deg;
+      }
+      .number-3 {
+        --rotation: 90deg;
+      }
+      .number-4 {
+        --rotation: 120deg;
+      }
+      .number-5 {
+        --rotation: 150deg;
+      }
+      .number-6 {
+        --rotation: 180deg;
+      }
+      .number-7 {
+        --rotation: 210deg;
+      }
+      .number-8 {
+        --rotation: 240deg;
+      }
+      .number-9 {
+        --rotation: 270deg;
+      }
+      .number-10 {
+        --rotation: 300deg;
+      }
+      .number-11 {
+        --rotation: 330deg;
+      }
+      .number-12 {
+        --rotation: 0deg;
+      }
+
+      /* Floating symbols background */
+      .bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .bg-animation li {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        animation: animate-bg 30s linear infinite;
+        bottom: -150px;
+        font-size: 2em;
+        color: var(--primary-color);
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      .bg-animation li:nth-child(1) {
+        left: 25%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+        content: "π";
+      }
+      .bg-animation li:nth-child(2) {
+        left: 10%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 2s;
+        animation-duration: 15s;
+      }
+      .bg-animation li:nth-child(3) {
+        left: 70%;
+        width: 70px;
+        height: 70px;
+        animation-delay: 4s;
+        animation-duration: 20s;
+      }
+      .bg-animation li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+      }
+      .bg-animation li:nth-child(5) {
+        left: 65%;
+        width: 65px;
+        height: 65px;
+        animation-delay: 10s;
+        animation-duration: 25s;
+      }
+      .bg-animation li:nth-child(6) {
+        left: 75%;
+        width: 110px;
+        height: 110px;
+        animation-delay: 3s;
+        animation-duration: 35s;
+      }
+      .bg-animation li:nth-child(7) {
+        left: 35%;
+        width: 130px;
+        height: 130px;
+        animation-delay: 7s;
+      }
+      .bg-animation li:nth-child(8) {
+        left: 50%;
+        width: 35px;
+        height: 35px;
+        animation-delay: 15s;
+        animation-duration: 45s;
+      }
+      .bg-animation li:nth-child(9) {
+        left: 20%;
+        width: 50px;
+        height: 50px;
+        animation-delay: 7s;
+        animation-duration: 35s;
+      }
+      .bg-animation li:nth-child(10) {
+        left: 85%;
+        width: 120px;
+        height: 120px;
+        animation-delay: 0s;
+        animation-duration: 11s;
+      }
+
+      [aria-hidden="true"] {
+        display: none;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes text-flicker {
+        0% {
+          opacity: 0.8;
+          text-shadow: 0 0 10px var(--primary-color);
+        }
+        50% {
+          opacity: 1;
+          text-shadow: 0 0 20px var(--primary-color);
+        }
+        100% {
+          opacity: 0.8;
+          text-shadow: 0 0 10px var(--primary-color);
+        }
+      }
+
+      @keyframes animate-bg {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+          border-radius: 0;
+        }
+        100% {
+          transform: translateY(-1000px) rotate(720deg);
+          opacity: 0;
+          border-radius: 50%;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .clock-container {
+          width: 250px;
+          height: 250px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1rem;
+        }
+        span {
+          font-size: 0.9em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="bg-animation">
+      <li>&int;</li>
+      <li>$\Sigma$</li>
+      <li>$\iota$</li>
+      <li>$\pi$</li>
+      <li>$\Omega$</li>
+      <li>$\delta$</li>
+      <li>$x^2$</li>
+      <li>$\alpha$</li>
+      <li>$\beta$</li>
+      <li>$\gamma$</li>
+    </ul>
+
+    <div class="main-container">
+      <header class="header">
+        <h1>Happy Teacher's Day!</h1>
+        <h2
+          style="color: var(--primary-color); animation: text-flicker 0.5s ease"
+        >
+          Shubronil Sir!!!
+        </h2>
+        <h2>
+          Thank you for making Math magical!<br />
+          With lots and lots of wishes, I am Happy to celebrate this day
+          together with you...
+        </h2>
+      </header>
+
+      <div class="clock-container">
+        <div class="clock-face">
+          <div class="hand hour-hand"></div>
+          <div class="hand minute-hand"></div>
+          <div class="hand second-hand"></div>
+
+          <div class="number number-1"><span>$e^{\iota\pi}+2$</span></div>
+          <div class="number number-2"><span>$\sqrt4$</span></div>
+          <div class="number number-3"><span>$\sqrt[3]{27}$</span></div>
+          <div class="number number-4"><span>$2^2$</span></div>
+          <div class="number number-5"><span>$5\sqrt{1}$</span></div>
+          <div class="number number-6"><span>$3!$</span></div>
+          <div class="number number-7"><span>$|7cos\pi|$</span></div>
+          <div class="number number-8"><span>$2^3$</span></div>
+          <div class="number number-9"><span>$\sqrt{81}$</span></div>
+          <div class="number number-10"><span>$\frac{20}{2}$</span></div>
+          <div class="number number-11"><span>$\sqrt{121}$</span></div>
+          <div class="number number-12"><span>$2\times6$</span></div>
+        </div>
       </div>
+      <div class="facts"></div>
+      <br />
+      <footer>
+        ~ A small site by
+        <span style="color: var(--primary-color)">Shivam Sharma</span>
+      </footer>
     </div>
+    <script defer>
+      // JavaScript Code
+      const hourHand = document.querySelector(".hour-hand"),
+      minuteHand = document.querySelector(".minute-hand"),
+      secondHand = document.querySelector(".second-hand"),
+      fact = document.querySelector('.facts'),
+      facts = [
+        `Euler’s Identity: $e^{\\iota\\pi} + 1 = 0$`,
+        `$\\pi$ is a irrational number with a value approx. ${Math.PI.toString()}`,
+        `$e$ is called Euler's Number with a value approx. ${Math.E.toString()}`,
+        `$e \\approx ${Math.E.toString()}$ is base of a natural logarithm($ln$)`,
+        `$\\pi \\approx ${Math.PI.toString()}$ – The ratio of a circle’s circumference to its diameter.`,
+        `$0! = 1$ by definition of factorial.`
+      ];
 
-    <div class="math-facts" id="mathFact">Loading math fact...</div>
+      function setClock() {
+        const now = new Date();
 
-    <footer>~ Made with pride & honour by Shivam Sharma</footer>
-  </div>
+        const seconds = now.getSeconds();
+        const secondsDegrees = (seconds / 60) * 360 + 90; // offset by 90 degrees
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
-  <script>
-    const hourHand = document.querySelector('.hour-hand');
-    const minuteHand = document.querySelector('.minute-hand');
-    const secondHand = document.querySelector('.second-hand');
+        const minutes = now.getMinutes();
+        const minutesDegrees = (minutes / 60) * 360 + (seconds / 60) * 6 + 90; // offset by 90
+        minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
 
-    function setClock() {
-      const now = new Date();
-      const seconds = now.getSeconds();
-      const minutes = now.getMinutes();
-      const hours = now.getHours();
+        const hours = now.getHours();
+        const hoursDegrees = (hours / 12) * 360 + (minutes / 60) * 30 + 90; // offset by 90
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      }
 
-      const secondsDegrees = ((seconds / 60) * 360) + 90;
-      const minutesDegrees = ((minutes / 60) * 360) + ((seconds/60)*6) + 90;
-      const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30) + 90;
+      function getFact() {
+        let choosen = facts[Math.floor(Math.random() * facts.length)];
+        fact.innerHTML = choosen;
+        window.auto(fact);
+      }
 
-      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-      minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
-      hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-    }
+      setInterval(getFact, 6000);
 
-    setClock();
-    setInterval(setClock, 1000);
-
-    const facts = [
-      "π ≈ 3.14159 – The ratio of a circle’s circumference to its diameter.",
-      "Euler’s Identity: e^(iπ) + 1 = 0.",
-      "Pythagoras: a² + b² = c².",
-      "Prime numbers are infinite in quantity.",
-      "0! = 1 by definition of factorial."
-    ];
-
-    function showRandomFact() {
-      const fact = facts[Math.floor(Math.random() * facts.length)];
-      document.getElementById('mathFact').innerText = fact;
-    }
-
-    showRandomFact();
-    setInterval(showRandomFact, 6000);
-  </script>
-</body>
+      // Set the clock immediately and then update every second
+      setClock();
+      setInterval(setClock, 1000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/contrib/auto-render/auto-render.js"></script>
+    <script>
+      const auto = renderMathInElement;
+    </script>
+    <script type="module" defer>
+      import katex from 'https://cdn.jsdelivr.net/npm/katex@0.16.22/+esm';
+      window.katex = katex;
+      document.querySelectorAll("span").forEach((span) => auto(span));
+      getFact();
+    </script>
+  </body>
 </html>
